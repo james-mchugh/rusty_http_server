@@ -1,7 +1,10 @@
+mod http;
+
 use std::io::{Read, Write};
 use std::net;
+use crate::http;
 
-fn echo(mut stream: net::TcpStream) {
+fn handle(mut stream: net::TcpStream) {
     let mut buffer: [u8; 512] = [0; 512];
 
     match stream.peer_addr() {
@@ -28,7 +31,7 @@ fn main() {
     for stream in listener.incoming() {
         //  todo: add error handling
         handlers.push(std::thread::spawn(move || {
-            echo(stream.unwrap());
+            handle(stream.unwrap());
         }));
     }
 }
