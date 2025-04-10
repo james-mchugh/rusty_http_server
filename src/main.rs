@@ -2,7 +2,6 @@ mod http;
 
 use std::io::{Read, Write};
 use std::net;
-use crate::http;
 
 fn handle(mut stream: net::TcpStream) {
     let mut buffer: [u8; 512] = [0; 512];
